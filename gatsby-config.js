@@ -1,6 +1,17 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Firebase Authentication`,
+    title: `Social Scraper`,
   },
-  plugins: [`gatsby-plugin-react-helmet`],
+  plugins: [
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-antd`,
+    `gatsby-transformer-csv`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/data`,
+        name: `data`,
+      },
+    },
+  ],
 }
