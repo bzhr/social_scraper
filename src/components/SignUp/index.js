@@ -4,7 +4,7 @@ import {
   withRouter,
 } from 'react-router-dom';
 
-import { auth, db } from '../../firebase';
+import { auth, db, twitterProvider } from '../../firebase';
 import * as routes from '../../constants/routes';
 
 const updateByPropertyName = (propertyName, value) => () => ({
@@ -58,6 +58,17 @@ class SignUpForm extends Component {
     event.preventDefault();
   }
 
+  onTwitterSignIn = event => {
+    auth.doSignInWithTwitter()
+    console.log("Fired the action!")
+    // console.log()
+
+  }
+
+  onSubmitFacebook = event => {
+    auth,doSignInWithFacebook()
+  }
+
   render() {
     const {
       username,
@@ -74,37 +85,51 @@ class SignUpForm extends Component {
       email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          value={username}
-          onChange={event => this.setState(updateByPropertyName('username', event.target.value))}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          value={email}
-          onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          value={passwordOne}
-          onChange={event => this.setState(updateByPropertyName('passwordOne', event.target.value))}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          value={passwordTwo}
-          onChange={event => this.setState(updateByPropertyName('passwordTwo', event.target.value))}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign Up
+      <div>
+        <button
+        onClick={this.onTwitterSignIn}
+        >
+          <div>Twitter Sign in</div>
         </button>
 
-        { error && <p>{error.message}</p> }
-      </form>
+        <button
+        onClick={this.onTwitterSignIn}
+        >
+          <div>Facebook Sign in</div>
+        </button>
+
+        <form onSubmit={this.onSubmitFacebook}>
+          <input
+            value={username}
+            onChange={event => this.setState(updateByPropertyName('username', event.target.value))}
+            type="text"
+            placeholder="Full Name"
+          />
+          <input
+            value={email}
+            onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
+            type="text"
+            placeholder="Email Address"
+          />
+          <input
+            value={passwordOne}
+            onChange={event => this.setState(updateByPropertyName('passwordOne', event.target.value))}
+            type="password"
+            placeholder="Password"
+          />
+          <input
+            value={passwordTwo}
+            onChange={event => this.setState(updateByPropertyName('passwordTwo', event.target.value))}
+            type="password"
+            placeholder="Confirm Password"
+          />
+          <button disabled={isInvalid} type="submit">
+            Sign Up
+          </button>
+
+          { error && <p>{error.message}</p> }
+        </form>
+      </div>
     );
   }
 }
