@@ -66,12 +66,14 @@ export default class AddResource extends React.Component {
               onChange={this.handleSource}
             />
             <Form.Radio
+              name="source"
               label="Facebook"
               value="fb"
               checked={source === "fb"}
               onChange={this.handleSource}
             />
             <Form.Radio
+              name="source"
               label="Instagram"
               value="in"
               checked={source === "in"}
@@ -81,12 +83,14 @@ export default class AddResource extends React.Component {
           <Form.Group name="type" inline>
             <label>Type: </label>
             <Form.Radio
+              name="type"
               label="Page/Profile"
               value="pg"
               checked={type === "pg"}
               onChange={this.handleType}
             />
             <Form.Radio
+              name="type"
               label="Hashtag"
               value="hs"
               checked={type === "hs"}
