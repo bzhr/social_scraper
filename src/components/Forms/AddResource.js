@@ -32,7 +32,7 @@ export default class AddResource extends React.Component {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "resource", ...this.state })
     })
-      .then(() => alert("Success!"))
+      .then(() => alert("Success!"), console.log(this.state))
       .catch(error => alert(error));
 
     e.preventDefault();
@@ -78,7 +78,7 @@ export default class AddResource extends React.Component {
               onChange={this.handleSource}
             />
           </Form.Group>
-          <Form.Group required name="type" inline>
+          <Form.Group name="type" inline>
             <label>Type: </label>
             <Form.Radio
               label="Page/Profile"
