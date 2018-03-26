@@ -30,6 +30,7 @@ const NavigationNonAuth = () =>
   <ul>
     <li><Link to={routes.LANDING}>Landing</Link></li>
     <li><Link to={routes.SIGN_IN}>Sign In</Link></li>
+    <li><Link to={routes.ACCOUNT}>Account</Link></li>
   </ul>
 
 export default withAuthentication(Navigation);
