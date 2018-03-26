@@ -10,10 +10,10 @@ import './index.css';
 const TemplateWrapper = ({ children }) => (
   <div>
     <Helmet
-      title="Gatsby Firebase Authentication"
+      title="Social Scraper"
       meta={[
-        { name: 'description', content: 'Gatsby Firebase Authentication' },
-        { name: 'keywords', content: 'Gatsby Firebase Authentication' },
+        { name: 'description', content: 'A tool for mining data from social media' },
+        { name: 'keywords', content: 'Data Facebook Twitter Instagram Stats Visualization Charts' },
       ]}
     />
     <div className="app">
