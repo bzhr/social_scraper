@@ -14,7 +14,8 @@ export default class AddResource extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: this.props.authUser.uid,
+      // userId: this.props.authUser.uid,
+      userId: "some-user-id",
       source: "tw",
       type: "pg",
       term: null
