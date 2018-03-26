@@ -42,7 +42,7 @@ export default class AddResource extends React.Component {
     const { source, type, term } = this.state;
     return (
       <div>
-        <Header as='h2' >Add new resource</Header>
+        <Header as="h2">Add new resource</Header>
         <Form
           name="resource"
           method="post"
@@ -59,21 +59,18 @@ export default class AddResource extends React.Component {
           <Form.Group name="source" inline>
             <label>Source: </label>
             <Form.Radio
-              name="source"
               value="tw"
               label="Twitter"
               checked={source === "tw"}
               onChange={this.handleSource}
             />
             <Form.Radio
-              name="source"
               label="Facebook"
               value="fb"
               checked={source === "fb"}
               onChange={this.handleSource}
             />
             <Form.Radio
-              name="source"
               label="Instagram"
               value="in"
               checked={source === "in"}
@@ -83,14 +80,12 @@ export default class AddResource extends React.Component {
           <Form.Group name="type" inline>
             <label>Type: </label>
             <Form.Radio
-              name="type"
               label="Page/Profile"
               value="pg"
               checked={type === "pg"}
               onChange={this.handleType}
             />
             <Form.Radio
-              name="type"
               label="Hashtag"
               value="hs"
               checked={type === "hs"}
