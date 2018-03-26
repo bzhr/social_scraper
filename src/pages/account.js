@@ -20,5 +20,5 @@ AccountPage.propTypes = {
 
 const authCondition = (authUser) => !!authUser;
 
-// export default withAuthorization(authCondition)(AccountPage);
-export default AccountPage
+export default withAuthorization(authCondition)(AccountPage);
+// export default AccountPage
