@@ -9,7 +9,7 @@ import Resources from '../components/Resources';
 
 const AccountPage = (props, { authUser }) =>
   <div>
-    {/*<Header as='h1' >Hello, {props.authUser.displayName}</Header>*/}
+    <Header as='h1' >Hello, {props.authUser.displayName}</Header>
     <AddResource authUser={props.authUser} />
     <Resources />
   </div>
@@ -21,4 +21,3 @@ AccountPage.propTypes = {
 const authCondition = (authUser) => !!authUser;
 
 export default withAuthorization(authCondition)(AccountPage);
-// export default AccountPage
