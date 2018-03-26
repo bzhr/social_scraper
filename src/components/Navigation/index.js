@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
+import withAuthentication from "../Session/withAuthentication";
 import SignOutButton from '../SignOut';
 import * as routes from '../../constants/routes';
 
-const Navigation = (props, { authUser }) =>
+const Navigation = (props, authUser) =>
   <div>
     { authUser
         ? <NavigationAuth />
@@ -13,7 +14,7 @@ const Navigation = (props, { authUser }) =>
     }
   </div>
 
-Navigation.contextTypes = {
+Navigation.propTypes = {
   authUser: PropTypes.object,
 };
 
@@ -31,4 +32,4 @@ const NavigationNonAuth = () =>
     <li><Link to={routes.SIGN_IN}>Sign In</Link></li>
   </ul>
 
-export default Navigation;
+export default withAuthentication(Navigation);
