@@ -11,7 +11,13 @@ function encode(data) {
 export default class Contact extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      // userId: this.props.authUser.uid,
+      userId: "some-user-id",
+      source: "tw",
+      type: "pg",
+      term: null
+    };
   }
 
   handleChange = (e) => {
