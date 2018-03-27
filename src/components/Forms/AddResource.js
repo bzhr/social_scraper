@@ -29,7 +29,7 @@ export default class AddResource extends React.Component {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "resource", ...this.state })
+      body: encode({ "form-name": "CollectionItem", ...this.state })
     })
       .then(() => alert("Success!"), console.log(this.state))
       .catch(error => alert(error));
@@ -43,7 +43,7 @@ export default class AddResource extends React.Component {
       <div>
         <Header as="h2">Add new resource</Header>
         <Form
-          name="resource"
+          name="CollectionItem"
           method="post"
           action="/thanks/"
           data-netlify="true"
@@ -58,18 +58,21 @@ export default class AddResource extends React.Component {
           <Form.Group name="source" inline>
             <label>Source: </label>
             <Form.Radio
+              name="source"
               value="tw"
               label="Twitter"
               checked={source === "tw"}
               onChange={this.handleSource}
             />
             <Form.Radio
+              name="source"
               label="Facebook"
               value="fb"
               checked={source === "fb"}
               onChange={this.handleSource}
             />
             <Form.Radio
+              name="source"
               label="Instagram"
               value="in"
               checked={source === "in"}
@@ -79,12 +82,14 @@ export default class AddResource extends React.Component {
           <Form.Group name="type" inline>
             <label>Type: </label>
             <Form.Radio
+              name="type"
               label="Page/Profile"
               value="pg"
               checked={type === "pg"}
               onChange={this.handleType}
             />
             <Form.Radio
+              name="type"
               label="Hashtag"
               value="hs"
               checked={type === "hs"}
