@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
 import { firebase, auth, db } from "../../firebase";
-import * as routes from '../../constants/routes';
+import * as routes from "../../constants/routes";
 
 const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
@@ -16,10 +16,7 @@ const withAuthentication = Component => {
     }
 
     componentDidMount() {
-      console.log("History", this.props.history)
-      const {
-        history,
-      } = this.props;
+      const { history } = this.props;
 
       firebase.auth.onAuthStateChanged(authUser => {
         if (authUser) {
@@ -47,14 +44,18 @@ const withAuthentication = Component => {
           history.push(routes.ACCOUNT);
         } else {
           this.setState(() => ({ authUser: null }));
-          
+
           history.push(routes.LANDING);
         }
       });
     }
     render() {
       const authUser = this.state.authUser;
-      return <Component {...this.props} authUser={authUser} />;
+      return authUser ? (
+        <Component {...this.props} authUser={authUser} />
+      ) : (
+        <Component {...this.props} />
+      );
     }
   }
 
