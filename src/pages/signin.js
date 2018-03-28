@@ -1,20 +1,17 @@
-import React from 'react';
+import React from "react";
+import { Button } from "semantic-ui-react";
 
 import { firebase, auth, db } from "../firebase";
-import { Button } from 'semantic-ui-react'
+import * as routes from '../constants/routes';
 
 class SignInPage extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {authUser: null}
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { authUser: null };
+  // }
 
   onTwitterSignIn = event => {
     auth.doSignInWithTwitter()
-
-    firebase.auth.getRedirectResult().then(result => {
-      console.log("REDIRECT RESULT IN SIGN UP", result);
-    });
   };
   render() {
     return (

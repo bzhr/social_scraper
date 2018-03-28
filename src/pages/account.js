@@ -1,23 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Header } from 'semantic-ui-react';
+import React from "react";
+import PropTypes from "prop-types";
+import { Header } from "semantic-ui-react";
 
-import withAuthorization from '../components/Session/withAuthorization';
-import AddResource from '../components/Forms/AddResource';
-import Resources from '../components/Resources';
+import withAuthorization from "../components/Session/withAuthorization";
+import withAuthentication from "../components/Session/withAuthentication";
+import AddResource from "../components/Forms/AddResource";
+import Resources from "../components/Resources";
 
-
-const AccountPage = (props, { authUser }) =>
+const AccountPage = ( props ) => (
   <div>
-    <Header as='h1' >Hello, {props.authUser.displayName}</Header>
-    <AddResource authUser={props.authUser} />
-    <Resources />
+    {props.authUser ?
+      <div>
+        <Header as='h1' >Hello, {props.authUser.displayName}</Header>
+        <AddResource authUser={props.authUser} />
+      </div> : null }
+      <Resources />
   </div>
+);
 
 AccountPage.propTypes = {
-  authUser: PropTypes.object,
+  authUser: PropTypes.object
 };
 
-const authCondition = (authUser) => !!authUser;
+const authCondition = authUser => !!authUser;
 
-export default withAuthorization(authCondition)(AccountPage);
+// export default withAuthorization(authCondition)(AccountPage);
+export default withAuthentication(AccountPage);

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import withAuthorization from '../components/Session/withAuthorization';
+// import withAuthorization from '../components/Session/withAuthorization';
+
+import withAuthentication from '../components/Session/withAuthentication';
 import { db } from '../firebase';
 
 const fromObjectToList = (object) =>
@@ -47,4 +49,5 @@ const UserList = ({ users }) =>
 
 const authCondition = (authUser) => !!authUser;
 
-export default withAuthorization(authCondition)(HomePage);
+// export default withAuthorization(authCondition)(HomePage);
+export default withAuthentication(HomePage)

@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 
 import { firebase, auth, db } from "../../firebase";
+import * as routes from '../../constants/routes';
 
 const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
@@ -14,11 +16,11 @@ const withAuthentication = Component => {
     }
 
     componentDidMount() {
-      firebase.auth.onAuthStateChanged(authUser => {
-        authUser
-          ? this.setState(() => ({ authUser }))
-          : this.setState(() => ({ authUser: null }));
-      });
+      console.log("History", this.props.history)
+      const {
+        history,
+      } = this.props;
+
       firebase.auth.onAuthStateChanged(authUser => {
         if (authUser) {
           firebase.auth.getRedirectResult().then(result => {
@@ -42,13 +44,16 @@ const withAuthentication = Component => {
             }
           });
           this.setState(() => ({ authUser }));
+          history.push(routes.ACCOUNT);
         } else {
           this.setState(() => ({ authUser: null }));
+          
+          history.push(routes.LANDING);
         }
       });
     }
     render() {
-      const authUser = this.state.authUser
+      const authUser = this.state.authUser;
       return <Component {...this.props} authUser={authUser} />;
     }
   }
@@ -57,7 +62,7 @@ const withAuthentication = Component => {
     authUser: PropTypes.object
   };
 
-  return WithAuthentication;
+  return withRouter(WithAuthentication);
 };
 
 export default withAuthentication;
