@@ -7,3 +7,4 @@ public/
 .DS_Store
 yarn-error.log
 netlify_access_token.json
+.env.development
