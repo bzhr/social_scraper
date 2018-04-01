@@ -29,7 +29,7 @@ export default class AddResource extends React.Component {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "resource", ...this.state })
+      body: encode({ "form-name": "testForm", ...this.state })
     })
       .then(() => alert("Success!"), console.log(this.state))
       .catch(error => alert(error));
@@ -43,7 +43,7 @@ export default class AddResource extends React.Component {
       <div>
         <Header as="h2">Add new resource</Header>
         <form
-          name="resource"
+          name="testForm"
           method="post"
           action="/thanks/"
           data-netlify="true"
