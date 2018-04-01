@@ -6,6 +6,7 @@
   "dependencies": {
     "babel-plugin-recharts": "^1.1.1",
     "firebase": "^4.8.0",
+    "firebase-admin": "^5.11.0",
     "gatsby": "^1.9.127",
     "gatsby-link": "^1.6.30",
     "gatsby-plugin-antd": "^1.0.10",

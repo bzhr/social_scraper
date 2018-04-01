@@ -42,7 +42,7 @@ export default class AddResource extends React.Component {
     return (
       <div>
         <Header as="h2">Add new resource</Header>
-        <Form
+        <form
           name="resource"
           method="post"
           action="/thanks/"
@@ -55,7 +55,7 @@ export default class AddResource extends React.Component {
               Don’t fill this out: <input name="bot-field" />
             </label>
           </p>
-          <Form.Group name="source" inline>
+          <div name="source" inline>
             <label>Source: </label>
             <Form.Radio
               name="source"
@@ -78,8 +78,8 @@ export default class AddResource extends React.Component {
               checked={source === "in"}
               onChange={this.handleSource}
             />
-          </Form.Group>
-          <Form.Group name="type" inline>
+          </div>
+          <div name="type" inline>
             <label>Type: </label>
             <Form.Radio
               name="type"
@@ -95,7 +95,7 @@ export default class AddResource extends React.Component {
               checked={type === "hs"}
               onChange={this.handleType}
             />
-          </Form.Group>
+          </div>
           <Form.Input
             required
             name="term"
@@ -107,7 +107,7 @@ export default class AddResource extends React.Component {
           <p>
             <Button type="submit">Send</Button>
           </p>
-        </Form>
+        </form>
       </div>
     );
   }
