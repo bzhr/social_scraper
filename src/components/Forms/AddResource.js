@@ -17,13 +17,13 @@ export default class AddResource extends React.Component {
     this.state = {
       email: this.props.authUser.uid,
       name: "tw",
-      term: null
+      message: null
     };
   }
 
-  handleSource = (e, { value }) => this.setState({ source: value });
-  handleType = (e, { value }) => this.setState({ type: value });
-  handleTerm = (e, { value }) => this.setState({ term: value });
+  handleSource = (e, { value }) => this.setState({ name: value });
+  // handleType = (e, { value }) => this.setState({ type: value });
+  handleTerm = (e, { value }) => this.setState({ message: value });
 
   handleSubmit = e => {
     fetch("/", {
@@ -38,7 +38,7 @@ export default class AddResource extends React.Component {
   };
 
   render() {
-    const { source, type, term } = this.state;
+    const { name, message } = this.state;
     return (
       <div>
         <Header as="h2">Add new resource</Header>
