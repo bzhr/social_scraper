@@ -64,8 +64,8 @@ const processNewForms = () => {
             token,
             secret
           );
-          console.log(command)
-          executeCommand(command)
+          console.log(command);
+          executeCommand(command);
         });
       })
     );
@@ -84,9 +84,7 @@ const twitterProfileCommand = (
     consumerKey
   } --twitter.consumer_secret ${consumerSecret} --twitter.access_token_key ${
     accessToken
-  } --twitter.access_token_secret ${
-    accessSecret
-  } --csv.filename boleroo.csv`;
+  } --twitter.access_token_secret ${accessSecret} --csv.filename boleroo.csv`;
 
 const executeCommand = command =>
   exec(command, (err, stdout, stderr) => {
