@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Bozhidar Hrisov <bozidar.hristov@gmail.com>",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-plugin-recharts": "^1.1.1",
     "firebase": "^4.8.0",
     "firebase-admin": "^5.11.0",
@@ -13,6 +14,13 @@
     "gatsby-plugin-react-helmet": "^1.0.8",
     "gatsby-source-filesystem": "^1.5.16",
     "gatsby-transformer-csv": "^1.3.7",
+    "littlefork-cli": "^1.0.0-rc.2",
+    "littlefork-plugin-csv": "^1.0.0-rc.2",
+    "littlefork-plugin-ddg": "^1.0.0-rc.1",
+    "littlefork-plugin-http": "^1.0.0-rc.1",
+    "littlefork-plugin-media": "^1.0.0-rc.1",
+    "littlefork-plugin-tap": "^1.0.0-rc.1",
+    "littlefork-plugin-twitter": "^1.0.0-rc.2",
     "prop-types": "^15.6.0",
     "recharts": "^1.0.0-beta.10",
     "semantic-ui-react": "^0.77.2"

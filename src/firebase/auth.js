@@ -1,4 +1,5 @@
-import { auth, db, twitterProvider, fbProvider } from "./firebase";
+import { auth, twitterProvider, fbProvider } from "./firebase";
+import { doCreateUser, doAddCredentials } from './db';
 
 // Sign Up
 export const doCreateUserWithEmailAndPassword = (email, password) =>
@@ -20,6 +21,7 @@ export const doGetRedirectResult = () =>
     .getRedirectResult()
     .then(function(result) {
       if (result.credential) {
+        const uid = result.user.uid
         const isNewUser = result.additionalUserInfo.isNewUser;
         const token = result.credential.accessToken;
         const secret = result.credential.secret;
@@ -27,22 +29,29 @@ export const doGetRedirectResult = () =>
         const username = result.additionalUserInfo.username;
         const photoUrl =
           result.additionalUserInfo.profile.profile_image_url_https;
-        console.log("CREATING USER");
-        db
-          .doCreateUser(
-            token,
-            secret,
-            providerId,
-            isNewUser,
+        if (isNewUser) {
+          doCreateUser(
+            uid,
             username,
             photoUrl
           )
           .catch(error => {
             console.log("Error creating user", error);
           });
+          doAddCredentials(
+            uid,
+            providerId,
+            token,
+            secret
+          )
+          .catch(error => {
+            console.log("Error adding credentials", error);
+          });
+        }
       }
     })
     .catch(function(error) {
+      console.log(error)
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;

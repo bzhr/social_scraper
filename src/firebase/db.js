@@ -1,22 +1,26 @@
 import { db } from "./firebase";
 
-// User API
-
 export const doCreateUser = (
-	id,
-	username,
-	providerId,
-	apiKey,
-	apiSecret,
-	photoUrl
+  id,
+  username,
+  photoUrl
 ) =>
-	db.ref(`users/${id}`).set({
-		username,
-		providerId,
-		apiKey,
-		apiSecret,
-		photoUrl
-	});
+  db.ref(`users/${id}`).set({
+    username,
+    photoUrl
+  });
+
+export const doAddCredentials = (
+  id,
+  providerId,
+  token,
+  secret
+) =>
+  db.ref(`credentials/${id}`).set({
+    providerId,
+    token,
+    secret,
+  });
 
 export const onceGetUsers = () => db.ref("users").once("value");
 
