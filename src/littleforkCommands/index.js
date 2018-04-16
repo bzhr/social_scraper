@@ -55,7 +55,6 @@ const processNewForms = () => {
         // const uid = "STVQc4Ll9Edt93fkfmBvinXO2fa2";
         const term = form.data.message;
         getCredentials(uid).once("value", function(data) {
-          console.log("DATA Credentials", data)
           const creds = data.val();
           if (creds) {
             const token = creds.token;
@@ -68,7 +67,6 @@ const processNewForms = () => {
               secret,
               uid
             );
-            console.log(command);
             executeCommand(command);
           }
         });

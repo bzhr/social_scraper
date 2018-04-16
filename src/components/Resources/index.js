@@ -17,7 +17,6 @@ class Resources extends React.Component {
     const filterData = data =>
       data.filter(resource => resource.node.name.includes(user.uid));
     const userData = filterData(data);
-    console.log("filtertered Data", userData);
     return (
       <div>
         <Header as="h1">Resources</Header>

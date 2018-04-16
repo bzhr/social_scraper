@@ -5,11 +5,9 @@ import { firebase, auth, db } from "../firebase";
 import * as routes from '../constants/routes';
 
 class SignInPage extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { authUser: null };
-  // }
-
+  componentDidMount() {
+    const { history } = this.props;
+  }
   onTwitterSignIn = event => {
     auth.doSignInWithTwitter()
   };

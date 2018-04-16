@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
+import { navigateTo } from "gatsby-link"
 
 import { firebase, auth, db } from "../../firebase";
 import * as routes from "../../constants/routes";
+
 
 const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
@@ -22,11 +24,11 @@ const withAuthentication = Component => {
         if (authUser) {
           auth.doGetRedirectResult()
           this.setState(() => ({ authUser }));
-          history.push(routes.ACCOUNT);
+          navigateTo(routes.HOME)
         } else {
           this.setState(() => ({ authUser: null }));
 
-          history.push(routes.LANDING);
+          navigateTo(routes.LANDING);
         }
       });
     }

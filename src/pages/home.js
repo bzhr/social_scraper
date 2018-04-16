@@ -32,7 +32,6 @@ class HomePage extends Component {
   render() {
     const resources = this.props.data.allFile.edges
     const { users } = this.state;
-    resources.forEach(resource => console.log(resource.node.relativePath.split("_")))
 
     return (
       <div>

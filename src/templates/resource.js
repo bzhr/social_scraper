@@ -20,7 +20,6 @@ import {
 export default function Template({ pathContext }) {
   const data = pathContext.data;
   let element = null
-  console.log(data);
   if (data) {
     const key = Object.keys(data)[0];
     const CsvData = data[key].edges;

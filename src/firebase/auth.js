@@ -1,13 +1,6 @@
 import { auth, twitterProvider, fbProvider } from "./firebase";
 import { doCreateUser, doAddCredentials } from "./db";
-
-// Sign Up
-export const doCreateUserWithEmailAndPassword = (email, password) =>
-  auth.createUserWithEmailAndPassword(email, password);
-
-// Sign In
-export const doSignInWithEmailAndPassword = (email, password) =>
-  auth.signInWithEmailAndPassword(email, password);
+import * as routes from "../constants/routes";
 
 // const provider = new auth.TwitterAuthProvider()
 // Twitter Sign Up
