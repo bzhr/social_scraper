@@ -67,7 +67,15 @@ const getUser = () =>
   window.localStorage.gatsbySocialScraperUser
     ? JSON.parse(window.localStorage.gatsbySocialScraperUser)
     : {};
-export const getCurrentUser = () => isBrowser && getUser()
+export const getCurrentUser = () => isBrowser && getUser();
 
 export const setUser = user =>
   (window.localStorage.gatsbySocialScraperUser = JSON.stringify(user));
+
+export const isLoggedIn = () => {
+  if (!isBrowser) return false;
+
+  const user = getUser();
+
+  return !!user.uid;
+};
