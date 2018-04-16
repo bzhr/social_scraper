@@ -50,9 +50,9 @@ const processNewForms = () => {
     .then(filteredData =>
       filteredData.forEach(form => {
         const source = form.data.name;
-        // const uid = form.data.email
+        const uid = form.data.email
         // set uid to dev db uid
-        const uid = "STVQc4Ll9Edt93fkfmBvinXO2fa2";
+        // const uid = "STVQc4Ll9Edt93fkfmBvinXO2fa2";
         const term = form.data.message;
         getCredentials(uid).once("value", function(data) {
           const creds = data.val();
