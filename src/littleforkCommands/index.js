@@ -61,7 +61,7 @@ const processNewForms = () => {
             const token = creds.token;
             const secret = creds.secret;
             const command = twitterProfileCommand(
-              "boleroo",
+              term,
               twitterConsumerKey,
               twitterConsumerSecret,
               token,
