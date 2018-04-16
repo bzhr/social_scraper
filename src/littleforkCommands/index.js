@@ -3,7 +3,7 @@ const axios = require("axios");
 const { exec } = require("child_process");
 // const Promise = require("bluebird");
 
-projectId = process.env.socialscraperdev;
+projectId = process.env.GATSBY_PROJECT_ID;
 clientEmail = process.env.FIREBASE_ADMIN_CLIENT_EMAIL;
 privateKey = process.env.FIREBASE_ADMIN_PRIVATE_KEY;
 dbUrl = process.env.GATSBY_DATABASE_URL;
@@ -55,19 +55,22 @@ const processNewForms = () => {
         // const uid = "STVQc4Ll9Edt93fkfmBvinXO2fa2";
         const term = form.data.message;
         getCredentials(uid).once("value", function(data) {
-          const creds = data.val();
-          const token = creds.token;
-          const secret = creds.secret;
-          const command = twitterProfileCommand(
-            "boleroo",
-            twitterConsumerKey,
-            twitterConsumerSecret,
-            token,
-            secret,
-            uid
-          );
-          console.log(command);
-          executeCommand(command);
+          console.log("DATA Credentials", data)
+          if (data) {
+            const creds = data.val();
+            const token = creds.token;
+            const secret = creds.secret;
+            const command = twitterProfileCommand(
+              "boleroo",
+              twitterConsumerKey,
+              twitterConsumerSecret,
+              token,
+              secret,
+              uid
+            );
+            console.log(command);
+            executeCommand(command);
+          }
         });
       })
     );
