@@ -46,7 +46,7 @@ const getCredentials = uid => db.ref(`credentials/${uid}`);
 
 const processNewForms = () => {
   getFormSubmissions()
-    .then(data => filterForms(data))
+    // .then(data => filterForms(data))
     .then(filteredData =>
       filteredData.forEach(form => {
         const source = form.data.name;
@@ -56,8 +56,8 @@ const processNewForms = () => {
         const term = form.data.message;
         getCredentials(uid).once("value", function(data) {
           console.log("DATA Credentials", data)
-          if (data) {
-            const creds = data.val();
+          const creds = data.val();
+          if (creds) {
             const token = creds.token;
             const secret = creds.secret;
             const command = twitterProfileCommand(
