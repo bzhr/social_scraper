@@ -20,27 +20,7 @@ const withAuthentication = Component => {
 
       firebase.auth.onAuthStateChanged(authUser => {
         if (authUser) {
-          firebase.auth.getRedirectResult().then(result => {
-            if (result.credential) {
-            //   const isNewUser = result.additionalUserInfo.isNewUser;
-            //   const token = result.credential.accessToken;
-            //   const secret = result.credential.secret;
-            //   const providerId = result.credential.providerId;
-            //   const username = result.additionalUserInfo.username;
-            //   const photoUrl =
-            //     result.additionalUserInfo.profile.profile_image_url_https;
-              // db.doCreateUser(token,
-              //   secret,
-              //   providerId,
-              //   isNewUser,
-              //   username,
-              //   photoUrl,
-              // ).catch(error => {
-              //     console.log("Error creating user", error);
-              //   });
-              auth.doGetRedirectResult()
-            }
-          });
+          auth.doGetRedirectResult()
           this.setState(() => ({ authUser }));
           history.push(routes.ACCOUNT);
         } else {

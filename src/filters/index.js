@@ -1,7 +1,7 @@
 export const sort = (a, b) => {
   return (
     a.node.retweet_count - b.node.retweet_count ||
-    a.node.favorite_count.localeCompare(b.node.favorite_count)
+    a.node.favorite_count - b.node.favorite_count
   );
 };
 export const favoriteToInt = x => {

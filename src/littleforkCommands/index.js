@@ -1,6 +1,7 @@
 const admin = require("firebase-admin");
 const axios = require("axios");
 const { exec } = require("child_process");
+// const Promise = require("bluebird");
 
 projectId = process.env.socialscraperdev;
 clientEmail = process.env.FIREBASE_ADMIN_CLIENT_EMAIL;
@@ -62,7 +63,8 @@ const processNewForms = () => {
             twitterConsumerKey,
             twitterConsumerSecret,
             token,
-            secret
+            secret,
+            uid
           );
           console.log(command);
           executeCommand(command);
@@ -76,15 +78,18 @@ const twitterProfileCommand = (
   consumerKey,
   consumerSecret,
   accessToken,
-  accessSecret
+  accessSecret,
+  uid
 ) =>
-  `node_modules/.bin/littlefork -Q twitter_user:@${
+  `node_modules/.bin/sugarcube -Q twitter_user:@${
     username
   } -p twitter_search,twitter_feed,http_get,media_exif,csv_export --twitter.consumer_key ${
     consumerKey
   } --twitter.consumer_secret ${consumerSecret} --twitter.access_token_key ${
     accessToken
-  } --twitter.access_token_secret ${accessSecret} --csv.filename boleroo.csv`;
+  } --twitter.access_token_secret ${accessSecret} --csv.filename ./src/data/${
+    uid
+  }_${username}.csv`;
 
 const executeCommand = command =>
   exec(command, (err, stdout, stderr) => {

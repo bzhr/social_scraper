@@ -1,5 +1,5 @@
 import { auth, twitterProvider, fbProvider } from "./firebase";
-import { doCreateUser, doAddCredentials } from './db';
+import { doCreateUser, doAddCredentials } from "./db";
 
 // Sign Up
 export const doCreateUserWithEmailAndPassword = (email, password) =>
@@ -21,7 +21,8 @@ export const doGetRedirectResult = () =>
     .getRedirectResult()
     .then(function(result) {
       if (result.credential) {
-        const uid = result.user.uid
+        setUser(result.user);
+        const uid = result.user.uid;
         const isNewUser = result.additionalUserInfo.isNewUser;
         const token = result.credential.accessToken;
         const secret = result.credential.secret;
@@ -30,28 +31,17 @@ export const doGetRedirectResult = () =>
         const photoUrl =
           result.additionalUserInfo.profile.profile_image_url_https;
         if (isNewUser) {
-          doCreateUser(
-            uid,
-            username,
-            photoUrl
-          )
-          .catch(error => {
+          doCreateUser(uid, username, photoUrl).catch(error => {
             console.log("Error creating user", error);
           });
-          doAddCredentials(
-            uid,
-            providerId,
-            token,
-            secret
-          )
-          .catch(error => {
+          doAddCredentials(uid, providerId, token, secret).catch(error => {
             console.log("Error adding credentials", error);
           });
         }
       }
     })
     .catch(function(error) {
-      console.log(error)
+      console.log(error);
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -70,3 +60,14 @@ export const doPasswordReset = email => auth.sendPasswordResetEmail(email);
 // Password Change
 export const doPasswordUpdate = password =>
   auth.currentUser.updatePassword(password);
+
+const isBrowser = typeof window !== `undefined`;
+
+const getUser = () =>
+  window.localStorage.gatsbySocialScraperUser
+    ? JSON.parse(window.localStorage.gatsbySocialScraperUser)
+    : {};
+export const getCurrentUser = () => isBrowser && getUser()
+
+export const setUser = user =>
+  (window.localStorage.gatsbySocialScraperUser = JSON.stringify(user));

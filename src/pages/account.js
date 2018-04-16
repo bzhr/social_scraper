@@ -14,7 +14,7 @@ const AccountPage = ( props ) => (
         <Header as='h1' >Hello, {props.authUser.displayName}</Header>
         <AddResource authUser={props.authUser} />
       </div> : null }
-      <Resources />
+      <Resources data={props.data}/>
   </div>
 );
 
@@ -26,3 +26,16 @@ const authCondition = authUser => !!authUser;
 
 // export default withAuthorization(authCondition)(AccountPage);
 export default withAuthentication(AccountPage);
+
+export const UserResourcesQuery = graphql`
+  query UserResourcesQuery {
+    allFile {
+      edges {
+        node {
+          relativePath
+          name
+        }
+      }
+    }
+  }
+`;
