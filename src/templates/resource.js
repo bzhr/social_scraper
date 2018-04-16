@@ -18,45 +18,52 @@ import {
 } from "../filters";
 
 export default function Template({ pathContext }) {
-  const data = pathContext.data
-  const key = Object.keys(data)[0]
-  const CsvData = data[key].edges;
+  const data = pathContext.data;
+  let element = null
+  console.log(data);
+  if (data) {
+    const key = Object.keys(data)[0];
+    const CsvData = data[key].edges;
 
-  const sortedData = CsvData.sort(sort).map(tweet => {
-    return tweet.node;
-  });
-  const correctDataTypes = sortedData.map(favoriteToInt).map(retweetToInt);
+    const sortedData = CsvData.sort(sort).map(tweet => {
+      return tweet.node;
+    });
+    const correctDataTypes = sortedData.map(favoriteToInt).map(retweetToInt);
 
-  const termOccurences = termToWordOccurences(
-    twitterMediaTypes,
-    correctDataTypes
-  );
-  const fileLength = correctDataTypes.length;
-  const percOccurences = termOccurences.map(val => {
-    return {
-      count: (val.count / fileLength * 100).toFixed(1) + " %",
-      name: val.name
-    };
-  });
+    const termOccurences = termToWordOccurences(
+      twitterMediaTypes,
+      correctDataTypes
+    );
+    const fileLength = correctDataTypes.length;
+    const percOccurences = termOccurences.map(val => {
+      return {
+        count: (val.count / fileLength * 100).toFixed(1) + " %",
+        name: val.name
+      };
+    });
 
-  const postsByYear = countOccurences(getTweetYear(correctDataTypes));
+    const postsByYear = countOccurences(getTweetYear(correctDataTypes));
+    element = 
+      (<div>
+        <h1>Resource</h1>
+        <p>
+          The Landing Page is open to everyone, even though the user isn't signed in.
+        </p>
+        <MostFavPostsContainer data={correctDataTypes} />
+        <Divider />
+        <LeastFavPostsContainer data={correctDataTypes} />
+        <Divider />
+        <TypesOfContentContainer
+          percOccurences={percOccurences}
+          data={termOccurences}
+        />
+        <Divider />
+        <PostsByYearContainer data={postsByYear} />
+      </div>)
+  } else {
+    element = (<p>"Data is not properly formatted."</p>)
+  }
   return (
-    <div>
-      <h1>Resource</h1>
-      <p>
-        The Landing Page is open to everyone, even though the user isn't signed
-        in.
-      </p>
-      <MostFavPostsContainer data={correctDataTypes} />
-      <Divider />
-      <LeastFavPostsContainer data={correctDataTypes} />
-      <Divider />
-      <TypesOfContentContainer
-        percOccurences={percOccurences}
-        data={termOccurences}
-      />
-      <Divider />
-      <PostsByYearContainer data={postsByYear} />
-    </div>
+    <div>{ element }</div>
   );
 }
