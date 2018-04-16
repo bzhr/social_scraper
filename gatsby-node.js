@@ -4,11 +4,11 @@ const littleforkCommands = require("./src/littleforkCommands");
 
 const removeCsvExtension = filename => filename.replace(".csv", "");
 
-exports.onPreBuild = ({ input }) => {
-  return new Promise((resolve, reject) => {
-    resolve(littleforkCommands.processNewForms());
-  });
-};
+// exports.onPreBuild = ({ input }) => {
+//   return new Promise((resolve, reject) => {
+//     resolve(littleforkCommands.processNewForms());
+//   });
+// };
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
