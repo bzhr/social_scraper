@@ -2,24 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
-import withAuthentication from "../Session/withAuthentication";
 import SignOutButton from '../SignOut';
 import * as routes from '../../constants/routes';
+import { auth } from '../../firebase'
 
-const Navigation = (props, {authUser}) =>
-  <div>
-    { props.authUser
-        ? <NavigationAuth />
-        : <NavigationNonAuth />
-    }
-  </div>
+// const Navigation = (props, { authUser }) =>
+//   <div>
+//     { auth.isLoggedIn()
+//         ? <NavigationAuth />
+//         : <NavigationNonAuth />
+//     }
+//   </div>
 
 
-Navigation.propTypes = {
-  authUser: PropTypes.object,
-};
+// Navigation.propTypes = {
+//   authUser: PropTypes.object,
+// };
 
-const NavigationAuth = () =>
+const Navigation = () =>
   <ul>
     <li><Link to={routes.LANDING}>Landing</Link></li>
     <li><Link to={routes.HOME}>Home</Link></li>
@@ -30,7 +30,6 @@ const NavigationAuth = () =>
 const NavigationNonAuth = () =>
   <ul>
     <li><Link to={routes.LANDING}>Landing</Link></li>
-    <li><Link to={routes.SIGN_IN}>Sign In</Link></li>
   </ul>
 
-export default withAuthentication(Navigation);
+export default Navigation;

@@ -11,7 +11,6 @@ import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AccountPage from '../Account';
-import withAuthentication from '../Session/withAuthentication';
 import * as routes from '../../constants/routes';
 
 import './index.css';
@@ -31,4 +30,4 @@ const App = () =>
     </div>
   </Router>
 
-export default withAuthentication(App);
+export default App;

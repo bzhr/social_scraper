@@ -24,7 +24,6 @@ const withAuthentication = Component => {
         if (authUser) {
           auth.doGetRedirectResult()
           this.setState(() => ({ authUser }));
-          navigateTo(routes.HOME)
         } else {
           this.setState(() => ({ authUser: null }));
 

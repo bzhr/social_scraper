@@ -2,8 +2,6 @@ import { auth, twitterProvider, fbProvider } from "./firebase";
 import { doCreateUser, doAddCredentials } from "./db";
 import * as routes from "../constants/routes";
 
-// const provider = new auth.TwitterAuthProvider()
-// Twitter Sign Up
 export const doSignInWithTwitter = () =>
   auth.signInWithRedirect(twitterProvider);
 
@@ -14,7 +12,6 @@ export const doGetRedirectResult = () =>
     .getRedirectResult()
     .then(function(result) {
       if (result.credential) {
-        setUser(result.user);
         const uid = result.user.uid;
         const isNewUser = result.additionalUserInfo.isNewUser;
         const token = result.credential.accessToken;
@@ -44,9 +41,6 @@ export const doGetRedirectResult = () =>
       const credential = error.credential;
     });
 
-// Sign out
-export const doSignOut = () => auth.signOut();
-
 // Password Reset
 export const doPasswordReset = email => auth.sendPasswordResetEmail(email);
 
@@ -72,3 +66,20 @@ export const isLoggedIn = () => {
 
   return !!user.uid;
 };
+
+// Sign out
+// export const doSignOut = () => auth.signOut().then(() => setUser({}))
+
+export const doSignOut = function() {
+  auth.signOut();
+  setUser({})
+  console.log("Signed out User")
+}
+
+auth.onAuthStateChanged(authUser => {
+  if (authUser) {
+    console.log("Setting User")
+    setUser(authUser);
+    doGetRedirectResult()
+  }
+});

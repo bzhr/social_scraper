@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import Navigation from '../components/Navigation';
-import withAuthentication from '../components/Session/withAuthentication';
-
 import './index.css';
 
 const TemplateWrapper = ({ children }) => (
@@ -30,4 +28,4 @@ TemplateWrapper.propTypes = {
   children: PropTypes.func,
 }
 
-export default withAuthentication(TemplateWrapper)
+export default TemplateWrapper

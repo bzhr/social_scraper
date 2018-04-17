@@ -10,8 +10,23 @@ exports.onPreBuild = ({ input }) => {
   });
 };
 
+exports.onCreatePage = async ({ page, boundActionCreators }) => {
+  const { createPage } = boundActionCreators;
+
+  // page.matchPath is a special key that's used for matching pages
+  // only on the client.
+  if (page.path.match(/^\/app/)) {
+    page.matchPath = '/app/:path';
+
+    // Update the page.
+    createPage(page);
+  }
+};
+
+
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
+
   return graphql(`
     query ResourcesQuery {
       allFile {
@@ -29,7 +44,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     }
     result.data.allFile.edges.forEach(function(edge) {
       const { node } = edge;
-      const urlPath = node.name
+      const urlPath = '/app/' + node.name;
       const nodeName = `all` + _.upperFirst(_.camelCase(`${node.name} Csv`));
       console.log(nodeName);
       return graphql(`
@@ -49,7 +64,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         }
       `).then(function(result) {
         const component = `src/templates/resource.js`;
-        console.log(urlPath)
+        console.log(urlPath);
         createPage({
           path: urlPath,
           component: path.resolve(component),
