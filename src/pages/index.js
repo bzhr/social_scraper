@@ -11,7 +11,8 @@ export default class LandingPage extends React.Component {
       super(props);
 
       this.state = {
-        isLoggedIn: !!window.localStorage.gatsbySocialScraperUser.uid
+        // isLoggedIn: !!window.localStorage.gatsbySocialScraperUser.uid
+        isLoggedIn: false
       };
     }
 
