@@ -44,7 +44,7 @@ const ResourceTable = ({ resources }) => (
           {resource.node.relativePath.split("_")[0]}
         </Table.Cell>
         <Link
-          to={resource.node.name}
+          to={"/" + resource.node.name}
         >
           <Table.Cell>
             {resource.node.name.split("_")[1]}

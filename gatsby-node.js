@@ -44,7 +44,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     }
     result.data.allFile.edges.forEach(function(edge) {
       const { node } = edge;
-      const urlPath = '/app/' + node.name;
+      const urlPath = node.name;
       const nodeName = `all` + _.upperFirst(_.camelCase(`${node.name} Csv`));
       console.log(nodeName);
       return graphql(`
