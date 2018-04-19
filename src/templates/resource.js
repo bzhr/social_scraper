@@ -18,6 +18,7 @@ import {
 } from "../filters";
 
 export default function Template({ pathContext }) {
+  console.log("DATA", pathContext)
   const data = pathContext.data;
   let element = null
   if (data) {
