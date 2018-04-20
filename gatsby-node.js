@@ -4,7 +4,7 @@ const littleforkCommands = require("./src/littleforkCommands");
 
 const removeCsvExtension = filename => filename.replace(".csv", "");
 
-exports.onPreBuild = ({ input }) => {
+exports.onPreBootstrap = ({ input }) => {
   console.log("\nRunning Command")
   return new Promise((resolve, reject) => {
     resolve(littleforkCommands.processNewForms());
