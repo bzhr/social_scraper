@@ -41,13 +41,13 @@ const ResourceTable = ({ resources }) => (
     {resources.map(resource =>
       <Table.Row key={resource.node.name}>
         <Table.Cell>
-          {resource.node.relativePath.split("_")[0]}
+          {resource.node.relativePath.split("_")[1]}
         </Table.Cell>
         <Link
           to={"/" + resource.node.name}
         >
           <Table.Cell>
-            {resource.node.name.split("_")[1]}
+            {resource.node.name.split("_")[0]}
           </Table.Cell>
         </Link>
       </Table.Row>

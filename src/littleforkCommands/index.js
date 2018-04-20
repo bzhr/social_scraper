@@ -1,6 +1,7 @@
 const admin = require("firebase-admin");
 const axios = require("axios");
 const { exec } = require("child_process");
+const _ = require("lodash");
 // const Promise = require("bluebird");
 
 projectId = process.env.GATSBY_PROJECT_ID;
@@ -51,8 +52,6 @@ const processNewForms = () => {
       filteredData.forEach(form => {
         const source = form.data.name;
         const uid = form.data.email
-        // set uid to dev db uid
-        // const uid = "STVQc4Ll9Edt93fkfmBvinXO2fa2";
         const term = form.data.message;
         getCredentials(uid).once("value", function(data) {
           const creds = data.val();
@@ -81,16 +80,21 @@ const twitterProfileCommand = (
   accessToken,
   accessSecret,
   uid
-) =>
-  `node_modules/.bin/sugarcube -Q twitter_user:@${
-    username
-  } -p twitter_search,twitter_feed,http_get,media_exif,csv_export --twitter.consumer_key ${
-    consumerKey
-  } --twitter.consumer_secret ${consumerSecret} --twitter.access_token_key ${
-    accessToken
-  } --twitter.access_token_secret ${accessSecret} --csv.filename ./src/data/${
-    uid
-  }_${username}.csv`;
+) => {
+  const uidLower = _.lowerCase(uid)
+  const usernameLower = _.lowerCase(username)
+  const filename = `${usernameLower}_${uidLower}.csv`.replace(/\s/g, '');
+  console.log("Filename", filename)
+  return (
+    `node_modules/.bin/sugarcube -Q twitter_user:@${
+      username
+    } -p twitter_search,twitter_feed,http_get,media_exif,csv_export --twitter.consumer_key ${
+      consumerKey
+    } --twitter.consumer_secret ${consumerSecret} --twitter.access_token_key ${
+      accessToken
+    } --twitter.access_token_secret ${accessSecret} --csv.filename ./src/data/${filename}`
+  )
+}
 
 const executeCommand = command =>
   exec(command, (err, stdout, stderr) => {

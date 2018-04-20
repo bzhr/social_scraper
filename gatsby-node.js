@@ -5,6 +5,7 @@ const littleforkCommands = require("./src/littleforkCommands");
 const removeCsvExtension = filename => filename.replace(".csv", "");
 
 exports.onPreBuild = ({ input }) => {
+  console.log("\nRunning Command")
   return new Promise((resolve, reject) => {
     resolve(littleforkCommands.processNewForms());
   });
@@ -16,13 +17,12 @@ exports.onCreatePage = async ({ page, boundActionCreators }) => {
   // page.matchPath is a special key that's used for matching pages
   // only on the client.
   if (page.path.match(/^\/app/)) {
-    page.matchPath = '/app/:path';
+    page.matchPath = "/app/:path";
 
     // Update the page.
     createPage(page);
   }
 };
-
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
@@ -46,7 +46,8 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       const { node } = edge;
       const urlPath = node.name;
       const nodeName = `all` + _.upperFirst(_.camelCase(`${node.name} Csv`));
-      console.log(nodeName);
+      console.log("Node Name", nodeName);
+      console.log("Without all", _.upperFirst(_.camelCase(`${node.name} Csv`)))
       return graphql(`
         query IndexQuery {
           ${nodeName} {
@@ -63,8 +64,9 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
           }
         }
       `).then(function(result) {
+        console.log("RESULT", result);
+        console.log("URL Path", urlPath);
         const component = `src/templates/resource.js`;
-        console.log(urlPath);
         createPage({
           path: urlPath,
           component: path.resolve(component),

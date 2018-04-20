@@ -23,7 +23,9 @@ export default function Template({ pathContext }) {
   let element = null
   if (data) {
     const key = Object.keys(data)[0];
+    console.log("key", key)
     const CsvData = data[key].edges;
+    console.log(CsvData)
 
     const sortedData = CsvData.sort(sort).map(tweet => {
       return tweet.node;
