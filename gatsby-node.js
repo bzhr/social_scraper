@@ -1,5 +1,6 @@
 const path = require("path");
 const _ = require(`lodash`);
+const Promise = require(`bluebird`)
 const littleforkCommands = require("./src/littleforkCommands");
 
 const removeCsvExtension = filename => filename.replace(".csv", "");
@@ -7,7 +8,8 @@ const removeCsvExtension = filename => filename.replace(".csv", "");
 exports.onPreBootstrap = ({ input }) => {
   console.log("\nRunning Command")
   return new Promise((resolve, reject) => {
-    resolve(littleforkCommands.processNewForms());
+    littleforkCommands.processNewForms();
+    resolve()
   });
 };
 
