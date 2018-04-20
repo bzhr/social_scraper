@@ -1,19 +1,25 @@
 const path = require("path");
 const _ = require(`lodash`);
-const Promise = require(`bluebird`)
+const Promise = require(`bluebird`);
 const littleforkCommands = require("./src/littleforkCommands");
 
 const removeCsvExtension = filename => filename.replace(".csv", "");
 
+// exports.onPreBootstrap = ({ input }) => {
+//   console.log("\nRunning Command");
+//   return new Promise((resolve, reject) => {
+//     littleforkCommands.processNewForms().then(() => resolve())
+//   });
+// };
+
+
 exports.onPreBootstrap = ({ input }) => {
-  console.log("\nRunning Command")
-  return new Promise((resolve, reject) => {
-    littleforkCommands.processNewForms();
-    resolve()
-  });
+  console.log("\nRunning Command");
+  return littleforkCommands.processNewForms();
+  console.log("Finished on PreBootstrap")
 };
 
-exports.onCreatePage = async ({ page, boundActionCreators }) => {
+exports.onCreatePage = ({ page, boundActionCreators }) => {
   const { createPage } = boundActionCreators;
 
   // page.matchPath is a special key that's used for matching pages
@@ -49,7 +55,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       const urlPath = node.name;
       const nodeName = `all` + _.upperFirst(_.camelCase(`${node.name} Csv`));
       console.log("Node Name", nodeName);
-      console.log("Without all", _.upperFirst(_.camelCase(`${node.name} Csv`)))
+      console.log("Without all", _.upperFirst(_.camelCase(`${node.name} Csv`)));
       return graphql(`
         query IndexQuery {
           ${nodeName} {

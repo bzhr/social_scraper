@@ -1,8 +1,8 @@
 const admin = require("firebase-admin");
 const axios = require("axios");
 const util = require('util');
-const exec = util.promisify(require('child_process').exec);
-// const exec = require('child_process').exec;
+// const exec = util.promisify(require('child_process').exec);
+const exec = require('child_process').exec;
 const _ = require("lodash");
 const Promise = require("bluebird");
 
@@ -48,36 +48,45 @@ const filterForms = data =>
 const getCredentials = uid => db.ref(`credentials/${uid}`);
 
 const processNewForms = () => {
-  // return new Promise((resolve, reject) => {
-    return getFormSubmissions()
-      // .then(data => filterForms(data))
-      .then(filteredData =>
-        filteredData.forEach(form => {
-          const source = form.data.name;
-          const uid = form.data.email;
-          const term = form.data.message;
-          getCredentials(uid).once("value", function(data) {
-            const creds = data.val();
-            if (creds) {
-              const token = creds.token;
-              const secret = creds.secret;
-              const command = twitterProfileCommand(
-                term,
-                twitterConsumerKey,
-                twitterConsumerSecret,
-                token,
-                secret,
-                uid
-              );
-              console.log("Running command");
-              executeCommand(command)
-              console.log("Command Finished")
-            }
-          });
-        })
-      )
-  // })
+  return getFormSubmissions()
+    // .then(data => filterForms(data))
+    .then(function(filteredData) {
+      const promises = filteredData.map(prepareAndRun)
+      const commands = Promise.all(promises)
+      return commands
+    }
+  )
 };
+
+const prepareAndRun = function(form) {
+    const source = form.data.name;
+    const uid = form.data.email;
+    const term = form.data.message;
+  // return new Promise(function(resolve) {
+    return getCredentials(uid).once("value").then(function(data) {
+      const creds = data.val();
+      if (creds) {
+        return creds
+      }
+    }).then(creds => {
+      console.log("Creds Result", creds)
+      const token = creds.token;
+      const secret = creds.secret;
+      const command = twitterProfileCommand(
+        term,
+        twitterConsumerKey,
+        twitterConsumerSecret,
+        token,
+        secret,
+        uid
+      );
+      return command
+    }).then(command => {
+    console.log("Running command");
+    return executeShellCommand(command);console.log("Command Finished")
+    })
+  // })
+}
 
 const twitterProfileCommand = (
   username,
@@ -102,13 +111,16 @@ const twitterProfileCommand = (
   }`;
 };
 
-const executeCommand = async command =>
-  await exec(command, (err, stdout, stderr) => {
-    if (err) {
-      console.log(err);
-    }
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
-  });
+const executeShellCommand = command =>
+  new Promise((resolve) => {
+      exec(command, (err, stdout, stderr) => {
+        if (err) {
+          console.log(err);
+        }
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+        resolve(stdout)
+      });
+  })
 
 exports.processNewForms = processNewForms;
