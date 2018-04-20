@@ -1,8 +1,10 @@
 const admin = require("firebase-admin");
 const axios = require("axios");
-const { exec } = require("child_process");
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+// const exec = require('child_process').exec;
 const _ = require("lodash");
-// const Promise = require("bluebird");
+const Promise = require("bluebird");
 
 projectId = process.env.GATSBY_PROJECT_ID;
 clientEmail = process.env.FIREBASE_ADMIN_CLIENT_EMAIL;
@@ -46,31 +48,35 @@ const filterForms = data =>
 const getCredentials = uid => db.ref(`credentials/${uid}`);
 
 const processNewForms = () => {
-  getFormSubmissions()
-    // .then(data => filterForms(data))
-    .then(filteredData =>
-      filteredData.forEach(form => {
-        const source = form.data.name;
-        const uid = form.data.email
-        const term = form.data.message;
-        getCredentials(uid).once("value", function(data) {
-          const creds = data.val();
-          if (creds) {
-            const token = creds.token;
-            const secret = creds.secret;
-            const command = twitterProfileCommand(
-              term,
-              twitterConsumerKey,
-              twitterConsumerSecret,
-              token,
-              secret,
-              uid
-            );
-            executeCommand(command);
-          }
-        });
-      })
-    );
+  // return new Promise((resolve, reject) => {
+    return getFormSubmissions()
+      // .then(data => filterForms(data))
+      .then(filteredData =>
+        filteredData.forEach(form => {
+          const source = form.data.name;
+          const uid = form.data.email;
+          const term = form.data.message;
+          getCredentials(uid).once("value", function(data) {
+            const creds = data.val();
+            if (creds) {
+              const token = creds.token;
+              const secret = creds.secret;
+              const command = twitterProfileCommand(
+                term,
+                twitterConsumerKey,
+                twitterConsumerSecret,
+                token,
+                secret,
+                uid
+              );
+              console.log("Running command");
+              executeCommand(command)
+              console.log("Command Finished")
+            }
+          });
+        })
+      )
+  // })
 };
 
 const twitterProfileCommand = (
@@ -81,23 +87,23 @@ const twitterProfileCommand = (
   accessSecret,
   uid
 ) => {
-  const uidLower = _.lowerCase(uid)
-  const usernameLower = _.lowerCase(username)
-  const filename = `${usernameLower}_${uidLower}.csv`.replace(/\s/g, '');
-  console.log("Filename", filename)
-  return (
-    `node_modules/.bin/sugarcube -Q twitter_user:@${
-      username
-    } -p twitter_search,twitter_feed,http_get,media_exif,csv_export --twitter.consumer_key ${
-      consumerKey
-    } --twitter.consumer_secret ${consumerSecret} --twitter.access_token_key ${
-      accessToken
-    } --twitter.access_token_secret ${accessSecret} --csv.filename ./src/data/${filename}`
-  )
-}
+  const uidLower = _.lowerCase(uid);
+  const usernameLower = _.lowerCase(username);
+  const filename = `${usernameLower}_${uidLower}.csv`.replace(/\s/g, "");
+  console.log("Filename", filename);
+  return `node_modules/.bin/sugarcube -Q twitter_user:@${
+    username
+  } -p twitter_search,twitter_feed,http_get,media_exif,csv_export --twitter.consumer_key ${
+    consumerKey
+  } --twitter.consumer_secret ${consumerSecret} --twitter.access_token_key ${
+    accessToken
+  } --twitter.access_token_secret ${accessSecret} --csv.filename ./src/data/${
+    filename
+  }`;
+};
 
-const executeCommand = command =>
-  exec(command, (err, stdout, stderr) => {
+const executeCommand = async command =>
+  await exec(command, (err, stdout, stderr) => {
     if (err) {
       console.log(err);
     }
