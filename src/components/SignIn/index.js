@@ -1,11 +1,18 @@
 import React from "react";
-import { Redirect } from "react-router-dom"
 import { Button } from "semantic-ui-react";
 
 import { firebase, auth, db } from "../../firebase";
 import * as routes from '../../constants/routes';
 
 class SignInPage extends React.Component {
+  componentWillMount() {
+    const { history } = this.props;
+    firebase.auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        history.push(routes.ACCOUNT)
+      }
+    })
+  }
   onTwitterSignIn = event => {
     auth.doSignInWithTwitter()
   };

@@ -11,7 +11,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     render={props =>
       !auth.isLoggedIn() ? (
         // If we’re not logged in, redirect to the home page.
-        <Redirect to={{ pathname: routes.LANDING }} />
+        <Redirect to={{ pathname: routes.LOGIN }} />
       ) : (
         <Component {...rest} />
       )

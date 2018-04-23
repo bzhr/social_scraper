@@ -80,6 +80,7 @@ auth.onAuthStateChanged(authUser => {
   if (authUser) {
     console.log("Setting User")
     setUser(authUser);
+    console.log("User is set!")
     doGetRedirectResult()
   }
 });
