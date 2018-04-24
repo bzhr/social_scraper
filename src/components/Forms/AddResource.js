@@ -31,7 +31,7 @@ export default class AddResource extends React.Component {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "contact", ...this.state })
     })
-      .then(() => alert("Success!"), console.log(this.state))
+      .then(() => alert("Success! Please be patient, the resource data will be ready in about 5 minutes."), console.log(this.state))
       .catch(error => alert(error));
 
     e.preventDefault();
