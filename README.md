@@ -28,16 +28,29 @@ To run the project you need to have a firebase database and add some environment
 
 List of environmental variables:
 FIREBASE_ADMIN_CLIENT_EMAIL - Check Firebase Admin
+
 FIREBASE_ADMIN_PRIVATE_KEY - Check Firebase Admin
+
 GATSBY_API_KEY - Firebase API key
+
 GATSBY_AUTH_DOMAIN - Firebase Auth Domain
+
 GATSBY_DATABASE_URL - Firebase DB URL
+
 GATSBY_MESSAGING_SENDER_ID - Firebase messaging sender ID
+
 GATSBY_NETLIFY_ACCESS_TOKEN - Netlify Access Token
+
 GATSBY_NETLIFY_FORM_ID - Netlify Form ID
+
 GATSBY_NETLIFY_SITE_ID - Netlify Site ID
+
 GATSBY_PROJECT_ID - Firebase Project ID
+
 GATSBY_STORAGE_BUCKET - Firebase Storage Bucket
+
 GATSBY_TWITTER_CONSUMER_KEY - Twitter APP consumer key
+
 GATSBY_TWITTER_CONSUMER_SECRET - Twitter APP consumer secret
+
 ## How to contribute
