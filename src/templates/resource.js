@@ -20,7 +20,6 @@ import {
 export default function Template({ location, pathContext }) {
   const urlPath = location.pathname
   const resourceName = urlPath.split("_")[0].slice(1)
-  console.log("URL", resourceName)
   const data = pathContext.data;
   let element = null
   if (data) {

@@ -12,11 +12,24 @@ import {
 import CustomTooltip from "./CustomTooltip";
 
 export default class SimpleBarChart extends React.Component {
-  // componentDidMount() {
-  //   console.log(this.refs)
-  // }
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeIndex: -1,
+    };
+    this.handleMouseEnter = this.handleMouseEnter.bind(this)
+  }
+
+  handleMouseEnter(o, index) {
+  	this.setState({
+    	activeIndex: index,
+    });
+  }
+
   render() {
     const data = this.props.data;
+    const activeIndex = this.state.activeIndex
     return (
       <ResponsiveContainer height={350} width="100%">
         <BarChart
@@ -28,13 +41,15 @@ export default class SimpleBarChart extends React.Component {
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip
-            content={
-              <CustomTooltip data={data} tooltipIndex={"dds"} />
-            }
+            content={<CustomTooltip data={data} tooltipIndex={activeIndex} />}
           />
           <Legend />
-          {<Bar dataKey="retweet_count" fill="#8884d8" />}
-          {<Bar dataKey="favorite_count" fill="#82ca9d" />}
+          <Bar
+            dataKey="retweet_count"
+            fill="#8884d8"
+            onMouseEnter={this.handleMouseEnter}
+          />
+          <Bar dataKey="favorite_count" fill="#82ca9d" />
         </BarChart>
       </ResponsiveContainer>
     );

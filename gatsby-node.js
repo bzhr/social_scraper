@@ -16,7 +16,6 @@ exports.onCreatePage = ({ page, boundActionCreators }) => {
   // page.matchPath is a special key that's used for matching pages
   // only on the client.
   if (page.path.match(/^\/app/)) {
-    console.log("Matched Client Side Path")
     page.matchPath = "/app/:path";
 
     // Update the page.

@@ -11,7 +11,6 @@ const Post = ({ tweet }) => {
   else {
     tweetSlice = null
   }
-  console.log("Tweet", tweet.tweet)
   return (
     <Segment textAlign="left" className="postSegment">
       <Grid>
