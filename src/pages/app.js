@@ -19,7 +19,7 @@ export default App
 
 export const ResourcesQuery = graphql`
   query ResourcesQuery {
-    allFile {
+    allFile(filter: {extension: {eq: "csv"}}) {
       edges {
         node {
           relativePath
