@@ -7,12 +7,13 @@ import Resources from "./Resources";
 import { auth } from "../firebase"
 
 const AccountPage = ({ data }) => {
-  console.log("Account props", data)
   const user = auth.getCurrentUser()
+  // const photoURL = user.providerData[0].photoURL
+  const displayName = user.displayName
   return (
     <div>
       <div>
-        <Header as="h1">Hello, {user.displayName}</Header>
+        <Header as="h1">Hello, {displayName}</Header>
         <AddResource authUser={user} />
       </div>
       <Resources data={data} />
