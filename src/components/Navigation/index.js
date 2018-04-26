@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import Link from 'gatsby-link';
-import { Menu, Button } from 'semantic-ui-react';
+import React, { Component } from "react";
+import Link from "gatsby-link";
+import { Menu } from "semantic-ui-react";
 
-import SignOutButton from '../SignOut';
-import * as routes from '../../constants/routes';
+import SignOutButton from "../SignOut";
+import * as routes from "../../constants/routes";
 
 // const Navigation = () =>
 //   <ul>
@@ -17,55 +17,30 @@ import * as routes from '../../constants/routes';
 // export default Navigation;
 
 export default class Navigation extends Component {
-  state = {}
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  state = {};
 
   render() {
-    const { activeItem } = this.state
+    // const { activeItem } = this.state
+    // console.log("Active Item", activeItem)
 
     return (
-      <Menu
-        fixed={"top"}
-        inverted={true}
-      >
-        <Link to={routes.LANDING}
-        >
-          <Menu.Item
-            name='landing'
-            active={activeItem === 'landing'}
-            content='Landing'
-            onClick={this.handleItemClick}
-          />
+      <Menu size={"large"} fixed={"top"} inverted={true}>
+        <Link>
+          <Menu.Item content="Landing" name="landing" />
         </Link>
 
         <Link to={routes.HOME}>
-          <Menu.Item
-            name='home'
-            active={activeItem === 'home'}
-            content='Home'
-            onClick={this.handleItemClick}
-          />
+          <Menu.Item name="home" content="Home" />
         </Link>
 
         <Link to={routes.ACCOUNT}>
-          <Menu.Item
-            name='account'
-            active={activeItem === 'account'}
-            content='Account'
-            onClick={this.handleItemClick}
-          />
+          <Menu.Item name="account" content="Account" />
         </Link>
 
         <Link to={routes.LOGIN}>
-          <Menu.Item
-            name='login'
-            active={activeItem === 'login'}
-            content='Login'
-            onClick={this.handleItemClick}
-          />
+          <Menu.Item name="login" content="Login" />
         </Link>
       </Menu>
-    )
+    );
   }
 }
