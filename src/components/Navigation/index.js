@@ -11,16 +11,14 @@ export default class Navigation extends Component {
 
   render() {
     let loginLogout;
-    if (typeof window !== "undefined") {
-      const isLoggedIn = auth.isLoggedIn()
-      if (isLoggedIn) {
-        loginLogout = <SignOutButton />
-      }
-      else {
-        loginLogout = (<Link to={routes.LOGIN} >
-        <Menu.Item name="login" content="Login" />
-      </Link>)
-      }
+    const isLoggedIn = auth.isLoggedIn()
+    if (isLoggedIn) {
+      loginLogout = <SignOutButton />
+    }
+    else {
+      loginLogout = (<Link to={routes.LOGIN} >
+      <Menu.Item name="login" content="Login" />
+    </Link>)
     }
     return (
       <Menu size={"large"} fixed={"top"} inverted={true}>

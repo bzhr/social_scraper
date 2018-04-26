@@ -13,9 +13,8 @@ class SignOutButton extends React.Component {
   render() {
     return (
       <div>
-        <Link to={routes.LANDING} >
+        <Link to={routes.LANDING} onClick={this.onSignOut}>
         <Menu.Item
-          onClick={this.onSignOut}
           content="Sign Out"
         />
         </Link>
