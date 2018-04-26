@@ -18,8 +18,11 @@ const TemplateWrapper = ({ children }) => (
       <Navigation />
 
       <hr/>
-
-      {children()}
+      <div
+        style={{padding: 20}}
+      >
+        {children()}
+      </div>
     </div>
   </div>
 )

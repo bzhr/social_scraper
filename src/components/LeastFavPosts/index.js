@@ -1,5 +1,4 @@
 import React from "react";
-import { Segment, Container } from "semantic-ui-react";
 
 import Post from "../Post";
 

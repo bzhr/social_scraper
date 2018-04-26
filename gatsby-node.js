@@ -5,18 +5,9 @@ const littleforkCommands = require("./src/littleforkCommands");
 
 const removeCsvExtension = filename => filename.replace(".csv", "");
 
-// exports.onPreBootstrap = ({ input }) => {
-//   console.log("\nRunning Command");
-//   return new Promise((resolve, reject) => {
-//     littleforkCommands.processNewForms().then(() => resolve())
-//   });
-// };
-
-
 exports.onPreBootstrap = ({ input }) => {
   console.log("\nRunning Command");
   return littleforkCommands.processNewForms();
-  console.log("Finished on PreBootstrap")
 };
 
 exports.onCreatePage = ({ page, boundActionCreators }) => {
@@ -25,6 +16,7 @@ exports.onCreatePage = ({ page, boundActionCreators }) => {
   // page.matchPath is a special key that's used for matching pages
   // only on the client.
   if (page.path.match(/^\/app/)) {
+    console.log("Matched Client Side Path")
     page.matchPath = "/app/:path";
 
     // Update the page.

@@ -17,15 +17,15 @@ import {
   countOccurences
 } from "../filters";
 
-export default function Template({ pathContext }) {
-  console.log("DATA", pathContext)
+export default function Template({ location, pathContext }) {
+  const urlPath = location.pathname
+  const resourceName = urlPath.split("_")[0].slice(1)
+  console.log("URL", resourceName)
   const data = pathContext.data;
   let element = null
   if (data) {
     const key = Object.keys(data)[0];
-    console.log("key", key)
     const CsvData = data[key].edges;
-    console.log(CsvData)
 
     const sortedData = CsvData.sort(sort).map(tweet => {
       return tweet.node;
@@ -47,10 +47,7 @@ export default function Template({ pathContext }) {
     const postsByYear = countOccurences(getTweetYear(correctDataTypes));
     element = 
       (<div>
-        <h1>Resource</h1>
-        <p>
-          The Landing Page is open to everyone, even though the user isn't signed in.
-        </p>
+        <h1>{resourceName}</h1>
         <MostFavPostsContainer data={correctDataTypes} />
         <Divider />
         <LeastFavPostsContainer data={correctDataTypes} />

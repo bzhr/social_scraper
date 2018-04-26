@@ -2,14 +2,14 @@ import React from "react";
 import { Button, h1, Segment, Dimmer, Loader } from "semantic-ui-react";
 
 import { firebase, auth } from "../../firebase";
-import * as routes from '../../constants/routes';
+import * as routes from "../../constants/routes";
 
 class SignInPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoading: false,
+      isLoading: false
     };
   }
 
@@ -17,23 +17,20 @@ class SignInPage extends React.Component {
     const { history } = this.props;
     firebase.auth.onAuthStateChanged(authUser => {
       if (authUser) {
-        history.push(routes.ACCOUNT)
-        this.setState({isLoading: false})
-        
+        history.push(routes.ACCOUNT);
+        this.setState({ isLoading: false });
       }
-    })
+    });
   }
   onTwitterSignIn = event => {
-    auth.doSignInWithTwitter()
-    this.setState({isLoading: true})
+    auth.doSignInWithTwitter();
+    this.setState({ isLoading: true });
   };
   render() {
     if (auth.isLoggedIn()) {
-      return(
-        <h1>You're logged in</h1>
-      )
+      return <h1>You're logged in</h1>;
     }
-    
+
     if (this.state.isLoading) {
       return (
         <Segment>
@@ -41,7 +38,7 @@ class SignInPage extends React.Component {
             <Loader>Loading</Loader>
           </Dimmer>
         </Segment>
-      )
+      );
     }
     return (
       <div>

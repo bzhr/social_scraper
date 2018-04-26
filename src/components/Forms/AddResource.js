@@ -41,7 +41,7 @@ export default class AddResource extends React.Component {
     const { name, message } = this.state;
     return (
       <div>
-        <Header as="h2">Add new resource</Header>
+        <Header as="h2">What do you want to analyze?</Header>
         <Form
           name="contact"
           method="post"
@@ -56,7 +56,7 @@ export default class AddResource extends React.Component {
             </label>
           </p>
           <Form.Group name="name" inline>
-            <label>Source: </label>
+            <label>Choose platform</label>
             <Form.Radio
               name="name"
               value="tw"
@@ -79,28 +79,11 @@ export default class AddResource extends React.Component {
               onChange={this.handleSource}
             />
           </Form.Group>
-          {/*<Form.Group name="type" inline>
-            <label>Type: </label>
-            <Form.Radio
-              name="type"
-              label="Page/Profile"
-              value="pg"
-              checked={type === "pg"}
-              onChange={this.handleType}
-            />
-            <Form.Radio
-              name="type"
-              label="Hashtag"
-              value="hs"
-              checked={type === "hs"}
-              onChange={this.handleType}
-            />
-          </Form.Group>*/}
           <Form.Input
             required
             name="message"
             fluid
-            label="Term"
+            label="Insert handle, ID or hashtag"
             placeholder="Term"
             onChange={this.handleTerm}
           />
