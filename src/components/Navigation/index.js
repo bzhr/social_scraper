@@ -9,6 +9,7 @@ export default class Navigation extends Component {
   state = {};
 
   render() {
+    let loginLogout;
     return (
       <Menu size={"large"} fixed={"top"} inverted={true}>
         <Link to={routes.LANDING} >
