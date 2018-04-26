@@ -38,21 +38,21 @@ const ResourceTable = ({ resources }) => (
       </Table.Row>
     </Table.Header>
     <Table.Body>
-    {resources.map(resource =>
-      <Table.Row key={resource.node.name}>
-        <Table.Cell>
-          {resource.node.relativePath.split("_")[1]}
-        </Table.Cell>
-        <Link
-          to={"/" + resource.node.name}
-        >
+      {resources.map(resource => (
+        <Table.Row key={resource.node.name}>
           <Table.Cell>
-            {resource.node.name.split("_")[0]}
+            {resource.node.relativePath.split("_")[1]}</Table.Cell>
+          <Table.Cell>
+
+          <Link
+            to={"/" + resource.node.name}
+          >
+            {resource.node.relativePath.split("_")[0].replace(".csv", "")}
+          </Link>
           </Table.Cell>
-        </Link>
-      </Table.Row>
-    )}
+        </Table.Row>
+      ))}
     </Table.Body>
   </Table>
-)
+);
 export default Resources;
