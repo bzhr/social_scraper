@@ -27,16 +27,16 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
 
   return graphql(`
-    query ResourcesQuery {
-      allFile {
-        edges {
-          node {
-            relativePath
-            name
-          }
+  query ResourcesQuery {
+    allFile(filter: {extension: {eq: "csv"}}) {
+      edges {
+        node {
+          relativePath
+          name
         }
       }
     }
+  }
   `).then(result => {
     if (result.errors) {
       return Promise.reject(result.errors);
