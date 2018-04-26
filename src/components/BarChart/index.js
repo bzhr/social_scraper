@@ -16,20 +16,21 @@ export default class SimpleBarChart extends React.Component {
     super(props);
 
     this.state = {
-      activeIndex: -1,
+      activeIndex: -1
     };
-    this.handleMouseEnter = this.handleMouseEnter.bind(this)
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
   }
 
   handleMouseEnter(o, index) {
-  	this.setState({
-    	activeIndex: index,
+    console.log("Index, ", index);
+    this.setState({
+      activeIndex: index
     });
   }
 
   render() {
     const data = this.props.data;
-    const activeIndex = this.state.activeIndex
+    const activeIndex = this.state.activeIndex;
     return (
       <ResponsiveContainer height={350} width="100%">
         <BarChart
@@ -49,7 +50,11 @@ export default class SimpleBarChart extends React.Component {
             fill="#8884d8"
             onMouseEnter={this.handleMouseEnter}
           />
-          <Bar dataKey="favorite_count" fill="#82ca9d" />
+          <Bar
+            dataKey="favorite_count"
+            fill="#82ca9d"
+            onMouseEnter={this.handleMouseEnter}
+          />
         </BarChart>
       </ResponsiveContainer>
     );
