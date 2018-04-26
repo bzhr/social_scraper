@@ -1,8 +1,8 @@
 import React from 'react';
 import { auth } from '../../firebase';
 import * as routes from '../../constants/routes';
-import { Redirect } from "react-router-dom";
 import Link from "gatsby-link";
+import { Menu } from 'semantic-ui-react';
 
 class SignOutButton extends React.Component {
 
@@ -14,12 +14,10 @@ class SignOutButton extends React.Component {
     return (
       <div>
         <Link to={routes.LANDING} >
-        <button
-          type="button"
+        <Menu.Item
           onClick={this.onSignOut}
-        >
-          Sign Out
-        </button>
+          content="Sign Out"
+        />
         </Link>
       </div>
     );
