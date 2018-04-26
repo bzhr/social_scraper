@@ -33,15 +33,15 @@ const ResourceTable = ({ resources }) => (
   <Table>
     <Table.Header>
       <Table.Row>
-        <Table.HeaderCell>UID</Table.HeaderCell>
         <Table.HeaderCell>Resource Name</Table.HeaderCell>
       </Table.Row>
     </Table.Header>
     <Table.Body>
       {resources.map(resource => (
         <Table.Row key={resource.node.name}>
-          <Table.Cell>
-            {resource.node.relativePath.split("_")[1]}</Table.Cell>
+          {/* <Table.Cell>
+            {resource.node.relativePath.split("_")[1]}
+          </Table.Cell> */}
           <Table.Cell>
 
           <Link
